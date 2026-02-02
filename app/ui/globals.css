@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+:root {
+  --spacing-small: 16;
+  --spacing-medium: 32;
+  --spacing-large: 48;
+  --spacing-extra-large: 64;
+  --spacing-max: 80;
+}
