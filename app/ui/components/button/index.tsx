@@ -10,7 +10,7 @@ export default function Button(props: ButtonHTMLAttributes<HTMLButtonElement>) {
       onClick={onClick}
       className={clsx(
         className,
-        "rounded-lg bg-(--color-primary) hover:cursor-pointer"
+        "rounded-lg bg-(--color-primary) p-3 text-white hover:cursor-pointer"
       )}
     >
       {title}

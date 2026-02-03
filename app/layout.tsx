@@ -6,6 +6,7 @@ import "@/app/ui/globals.css"
 import { garamond } from "@/app/ui/fonts"
 
 import { fetchSiteConfig } from "./lib/data"
+import Menu from "./ui/components/menu"
 import { ThemeProvider } from "./ui/theme"
 
 export const metadata: Metadata = {
@@ -27,7 +28,10 @@ export default async function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={garamond.className}>
         <Provider>
-          <ThemeProvider value={siteConfig}>{children}</ThemeProvider>
+          <ThemeProvider value={siteConfig}>
+            <Menu />
+            {children}
+          </ThemeProvider>
         </Provider>
       </body>
     </html>
