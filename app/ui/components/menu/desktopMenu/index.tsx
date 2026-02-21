@@ -12,7 +12,7 @@ export default function DesktopMenu({ items }: DesktopMenuProps) {
   const pathname = usePathname()
 
   return (
-    <ul className="hidden gap-18 p-3 shadow-sm lg:flex lg:flex-row lg:items-center lg:justify-between xl:gap-24">
+    <ul className="hidden gap-12 p-3 shadow-sm lg:flex lg:flex-row lg:items-center lg:justify-between xl:gap-18">
       <MenuItem
         className="flex-1 text-4xl xl:text-6xl"
         text="M & V"
