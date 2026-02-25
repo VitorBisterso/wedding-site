@@ -26,7 +26,7 @@ export default function TimeCountdown({ date }: TimeCountdownProps) {
   const getDateDiff = useCallback(() => {
     const today = new Date()
 
-    let delta = Math.abs(date.getTime() - today.getTime()) / 1000
+    let delta = Math.floor(Math.abs(date.getTime() - today.getTime()) / 1000)
 
     // calculate (and subtract) whole days
     const days = Math.floor(delta / 86400)
@@ -41,7 +41,7 @@ export default function TimeCountdown({ date }: TimeCountdownProps) {
     delta -= minutes * 60
 
     // what's left is seconds
-    const seconds = Math.round(delta % 60)
+    const seconds = delta % 60
 
     return {
       days,
@@ -60,14 +60,29 @@ export default function TimeCountdown({ date }: TimeCountdownProps) {
     return () => clearInterval(interval)
   }, [getDateDiff])
 
+  function getLabel() {
+    const today = new Date()
+
+    const isFuture = date.getTime() > today.getTime()
+
+    if (isFuture) return "Faltam apenas"
+
+    return "Já se passaram"
+  }
+
   const { days, hours, minutes, seconds } = dateDiff
 
   return (
-    <div className="flex flex-row gap-8">
-      <TimeCountdownItem timeLeft={days} text="Dias" />
-      <TimeCountdownItem timeLeft={hours} text="Horas" />
-      <TimeCountdownItem timeLeft={minutes} text="Minutos" />
-      <TimeCountdownItem timeLeft={seconds} text="Segundos" />
+    <div className="flex flex-col gap-2">
+      <h1 className="text-center text-xl text-(--color-primary) lg:text-4xl">
+        {getLabel()}
+      </h1>
+      <div className="flex flex-row gap-8">
+        <TimeCountdownItem timeLeft={days} text="Dias" />
+        <TimeCountdownItem timeLeft={hours} text="Horas" />
+        <TimeCountdownItem timeLeft={minutes} text="Minutos" />
+        <TimeCountdownItem timeLeft={seconds} text="Segundos" />
+      </div>
     </div>
   )
 }

@@ -5,8 +5,9 @@ import "@/app/ui/globals.css"
 
 import { garamond } from "@/app/ui/fonts"
 
-import { fetchSiteConfig } from "./lib/data"
+import { fetchGeneralInfo, fetchSiteConfig } from "./lib/data"
 import Menu from "./ui/components/menu"
+import { GeneralInfoProvider } from "./ui/providers/generalInfo"
 import { ThemeProvider } from "./ui/theme"
 
 export const metadata: Metadata = {
@@ -22,15 +23,20 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const siteConfig = await fetchSiteConfig()
+  const [siteConfig, generalInfo] = await Promise.all([
+    fetchSiteConfig(),
+    fetchGeneralInfo(),
+  ])
 
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={garamond.className}>
         <Provider>
           <ThemeProvider value={siteConfig}>
-            <Menu />
-            {children}
+            <GeneralInfoProvider value={generalInfo}>
+              <Menu />
+              {children}
+            </GeneralInfoProvider>
           </ThemeProvider>
         </Provider>
       </body>

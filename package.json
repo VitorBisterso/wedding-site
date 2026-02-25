@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@date-fns/tz": "^1.4.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "jotai": "^2.17.0",
     "next": "16.1.6",
     "prettier-plugin-tailwindcss": "^0.7.2",
